@@ -18,28 +18,3 @@ for string in sys.stdin:
             print(max(a, b))
         else:
             print("Sorry, the inputs cannot be equal")
-
-
-        
-        
-    
-
-
-
-
-   
-   
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
