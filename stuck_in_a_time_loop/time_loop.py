@@ -13,9 +13,3 @@ for x in sys.stdin:
     if 1 <= N & N <= 100:
         for x in range(N):
             print(x + 1, "Abracadabra")
-        
-
-
-
-
-    
