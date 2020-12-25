@@ -1,7 +1,3 @@
-# take standard input
-# split into list
-# print second input
-
 import sys
 
 carrotlist = []
