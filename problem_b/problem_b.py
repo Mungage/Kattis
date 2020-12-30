@@ -37,7 +37,6 @@ import sys
 # Get inputs
 
 def main():
-
     # Take inputs from stdin and format them into a list of ints
     inputs = sys.stdin.read().split() 
 
@@ -45,16 +44,36 @@ def main():
     T = int(inputs[0])
 
     # Split inputs into lists according to T number of test cases
-    sliced_list = slice_list(T, inputs)
+    test_cases = slice_list(T, inputs)
 
-    print(sliced_list)
+    #print(test_cases)
 
-    # split the remaining list using the next int, i.e. the first index we find, and taking +1 of the elements in the list
-    # This will provide us with T = inputs[0] and T number of lists containing n rows of inputs
-    # I.e. each list shall look like this [4, 3, 110, 000, 110, 000], [2, 3, 101, 000], [2, 2, 10, 01]
-    # Once we have these lists within another list, we can access them independently.
+    # Now that we've got lists of ['4', '3', '110', '000', '110', '000'], ['2', '3', '101', '000'], ['2', '2', '10', '01']
+    # We want to split these into 3 2d tuples  
+
+    # 2d array should contain n rows taking first string of next 4 inputs in every list
+
+    # We want to get a 2d_list signifying a grid.
+    # The grid should contain r rows, and c numbers 
+
+    # which means the 2d_list for each test case would look like this: [[1, 0, 0], [0, 0, 0], [1, 1, 0], [0, 0, 0]]
+    # We get this list by going through each index, i.e. each list in our sliced_list:
+    # First index in each t in sliced_list will mean we want to create r lists.
+    # We then go through every element after the second index[1:] and split these strings up.
+
+    # So essentially we create t[0] lists for every list in sliced_list
+
+        #for r in range(int(test_case[0])):     # För varje rad i test_caset
+        #    grid.append(test_case[2:])
+            # ta alla slices från 2: och lägg i en lista
+       
 
 
+        # for n rows
+        # split the strings 3 times
+        # this will become one list.
+    #except:
+        #print("Something went wrong")
 
 def format_list(inputs):
     try:
@@ -64,12 +83,12 @@ def format_list(inputs):
 
 def slice_list(T, inputs):
     temp_list = inputs
-    sliced_list = [] 
+    sliced_list = []
+    test_cases = [] 
 
     # Remove first index as we don't need it anymore
     try:
         temp_list.pop(0)    
-
         # We want to slice the temp_list T times and create T amount of separate lists containing the given inputs
         for t in range(T):                           
             n = int(temp_list[0]) + 2                                    
@@ -77,29 +96,35 @@ def slice_list(T, inputs):
             sliced_list.append(temp_list[0:n])
             del temp_list[0:n]
 
-        return sliced_list
+        for test_case in sliced_list:
+            grid = []
+
+            #print(test_case)
+            # Creating the 2d grid for each testcase
+            for r in test_case[2:]:      # för varje sträng i test case range 2:
+                res = []
+                res[:] = r
+                grid.append(res)
+            
+            test_cases.append(grid)
+            
+            print("end of test case")
+
+        print(test_cases)
+
+        return test_cases
 
     except IndexError:
         print("Error caught when slicing lists")
-
-
-       # for j in range(n):         
-       #     t.append(temp_list[0])
-
+        
+class test_case:
+    def __init__(self):
+        pass
         
 
 
-
-
-
-
-
-
-
-
-
-
-
+    def define_grid(self, sliced_list):
+        pass
 
 
 main()
