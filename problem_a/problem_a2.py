@@ -25,27 +25,31 @@
 import sys
 
 def main():
+    try:
+        # Get the standard inputs and turn them into a list of elements
+        inputs = sys.stdin.read().split()
 
-    # Get the standard inputs and turn them into a list of elements
-    inputs = sys.stdin.read().split()
+        # Format the list of inputs into a mixed list of strings and ints
+        formatted_list = [format_list(n) for n in format_list(inputs)]
+        
+        # Set the T variable to the first index, and n equal to the number of ints after the first index
+        T = formatted_list[0]
+        n = []
+        get_number_of_postcards(formatted_list, n)
+        
+        # Get a sliced list containing the actual postcard/cities 
+        
+        list_of_postcards = slice_list(formatted_list, n)
 
-    # Format the list of inputs into a mixed list of strings and ints
-    formatted_list = [format_list(n) for n in format_list(inputs)]
-    
-    # Set the T variable to the first index, and n equal to the number of ints after the first index
-    T = formatted_list[0]
-    n = []
-    get_number_of_postcards(formatted_list, n)
-    
-    # Get a sliced list containing the actual postcard/cities 
-    list_of_postcards = slice_list(formatted_list, n)
+        # Check all the given constraints
+        if check_constraints(formatted_list, T, n, list_of_postcards):
+            # Finally, print our final results
+            check_unique_cities(list_of_postcards, T)
+        else:
+            print("One or more of the constraints were broken")
+    except:
+        print("An exception was caught!")
 
-    # Check all the given constraints
-    if check_constraints(formatted_list, T, n, list_of_postcards):
-        # Finally, print our final results
-        check_unique_cities(list_of_postcards, T)
-    else:
-        print("One or more of the constraints were broken")
 
 # Helper function to turn our inputs into a mixed list of ints and strings
 def format_list(inputs):
@@ -83,13 +87,13 @@ def slice_list(formatted_list, n):
 def check_constraints(formatted_list, T, n, list_of_postcards):
 
     # Check whether the years to investigate variable is within the given constraints 
-    if not T == len(n) and T > 0 and T <= 50:
+    if not T == len(n) or not T >= 1 or not T <= 50:
         return False
 
     # Check constraints for n, and if n is equal to the actual number of postcards
     i = 0
     for n in n:
-        if not n == len(list_of_postcards[i]) or n <= 0 or n >= 100:          
+        if not n == len(list_of_postcards[i]) or n <= 0 or n > 100:          
             return False
         else:
             i += 1
