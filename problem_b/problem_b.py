@@ -34,8 +34,6 @@ Finally, the last line of each test case should be followed by the string ------
 
 import sys
 
-# Get inputs
-
 def main():
     # Take inputs from stdin and format them into a list of ints
     inputs = sys.stdin.read().split() 
@@ -43,39 +41,13 @@ def main():
     # set T to first index of inputs specifying the number of test cases
     T = int(inputs[0])
 
-    # Split inputs into lists according to T number of test cases
+    # split our inputs into a 3dlist of testcases and their respective grids
     test_cases = slice_list(T, inputs)
 
-    #print(test_cases)
+    # Finally  
+    control_grid(test_cases)
 
-    # Now that we've got lists of ['4', '3', '110', '000', '110', '000'], ['2', '3', '101', '000'], ['2', '2', '10', '01']
-    # We want to split these into 3 2d tuples  
-
-    # 2d array should contain n rows taking first string of next 4 inputs in every list
-
-    # We want to get a 2d_list signifying a grid.
-    # The grid should contain r rows, and c numbers 
-
-    # which means the 2d_list for each test case would look like this: [[1, 0, 0], [0, 0, 0], [1, 1, 0], [0, 0, 0]]
-    # We get this list by going through each index, i.e. each list in our sliced_list:
-    # First index in each t in sliced_list will mean we want to create r lists.
-    # We then go through every element after the second index[1:] and split these strings up.
-
-    # So essentially we create t[0] lists for every list in sliced_list
-
-        #for r in range(int(test_case[0])):     # För varje rad i test_caset
-        #    grid.append(test_case[2:])
-            # ta alla slices från 2: och lägg i en lista
-       
-
-
-        # for n rows
-        # split the strings 3 times
-        # this will become one list.
-    #except:
-        #print("Something went wrong")
-
-def format_list(inputs):
+def convert_list(inputs):
     try:
         return int(inputs)
     except (ValueError, TypeError):
@@ -86,10 +58,9 @@ def slice_list(T, inputs):
     sliced_list = []
     test_cases = [] 
 
-    # Remove first index as we don't need it anymore
     try:
         temp_list.pop(0)    
-        # We want to slice the temp_list T times and create T amount of separate lists containing the given inputs
+        # We want to slice the temp_list T times and create T amount of separate lists containing the provided inputs
         for t in range(T):                           
             n = int(temp_list[0]) + 2                                    
                                                                     
@@ -99,35 +70,44 @@ def slice_list(T, inputs):
         for test_case in sliced_list:
             grid = []
 
-            #print(test_case)
             # Creating the 2d grid for each testcase
-            for r in test_case[2:]:      # för varje sträng i test case range 2:
+            for r in test_case[2:]:  
                 res = []
                 res[:] = r
+                # converting the grid into ints
+                res = [convert_list(n) for n in convert_list(res)]
                 grid.append(res)
-            
+                
             test_cases.append(grid)
-            
-            print("end of test case")
-
-        print(test_cases)
 
         return test_cases
-
     except IndexError:
         print("Error caught when slicing lists")
-        
-class test_case:
-    def __init__(self):
-        pass
-        
 
+def control_grid(test_cases):
+    # When we print a test case we get its grid
+    # A grid looks like this: [1,1,0], [0,0,0], [1,1,0], [0,0,0]
+    
+    # For each row in the grid we want to check three things
+    # If a position in the grid is i, n, or p
 
-    def define_grid(self, sliced_list):
-        pass
+    # To do this we need to check each combination of row and column.
+    
+    # for each index[j] in a row.
+    # Check whether there is another "1" in the same column
 
+    # if index[j] of row i is 1, and if index [j] of every other row in test case are 1, then print index[0] of row 1 as an I. 
+    # else if index[1:] contain any 1, print index[j] as a p
+    # if index[0] of row 1 is ]
+
+    # if i1, j1 == 1 and i3, j1 == 1, print I
+    # elif i1, j1 == 1 and i1, j4 == 1, print p
+    # else print N
+
+    for test_case in test_cases:
+        print(test_case)
+
+        for i in range(len(test_case)):
+            print(i)
 
 main()
-
-
-
