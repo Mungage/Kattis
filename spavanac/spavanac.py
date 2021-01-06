@@ -7,7 +7,6 @@ from datetime import timedelta
 
 def main():
     # Take inputs from standard inputs
-
     for line in sys.stdin:
         inputs = line.split()
 
